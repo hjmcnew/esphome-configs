@@ -34,7 +34,7 @@ TYPES = [
     CONF_DOWN,
 ]
 
-UPLIFT_DESK_SWITCH_SCHEMA = switch.SWITCH_SCHEMA.extend(
+UPLIFT_DESK_SWITCH_SCHEMA = switch._SWITCH_SCHEMA.extend(
     {
         cv.GenerateID(): cv.declare_id(UpliftDeskSwitch),
         cv.Optional(
