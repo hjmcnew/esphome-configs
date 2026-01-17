@@ -37,9 +37,9 @@ TYPES = [
 def uplift_desk_button_schema(
     command,
     class_,
-    icon: str = button._UNDEF,
-    entity_category: str = button._UNDEF,
-    device_class: str = button._UNDEF,
+    icon: str = None,
+    entity_category: str = None,
+    device_class: str = None,
 ):
     return button.button_schema(
         class_=class_, icon=icon, entity_category=entity_category, device_class=device_class
