@@ -4,7 +4,6 @@ import esphome.config_validation as cv
 from esphome.components import button
 from esphome.const import (
     CONF_ID,
-    DEVICE_CLASS_RESTART,
     ENTITY_CATEGORY_CONFIG,
     ENTITY_CATEGORY_DIAGNOSTIC,
     CONF_COMMAND,
@@ -41,9 +40,16 @@ def uplift_desk_button_schema(
     entity_category: str = None,
     device_class: str = None,
 ):
-    return button.button_schema(
-        class_=class_, icon=icon, entity_category=entity_category, device_class=device_class
-    ).extend(
+    # Build kwargs dict conditionally to avoid passing None values
+    kwargs = {"class_": class_}
+    if icon is not None:
+        kwargs["icon"] = icon
+    if entity_category is not None:
+        kwargs["entity_category"] = entity_category
+    if device_class is not None:
+        kwargs["device_class"] = device_class
+    
+    return button.button_schema(**kwargs).extend(
         {
             cv.GenerateID(): cv.declare_id(UpliftDeskButton),
             cv.Optional(CONF_COMMAND, default=command): cv.hex_int,
