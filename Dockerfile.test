@@ -1,10 +1,14 @@
 # syntax=docker/dockerfile:1
+FROM ubuntu:24.04
 
-# Stage 1: Lint and static analysis (Alpine for speed)
-FROM python:3.13-alpine3.23 AS lint
+RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
+    --mount=type=cache,target=/var/lib/apt,sharing=locked \
+    apt-get update && \
+    apt-get install -y --no-install-recommends \
+        python3 python3-pip python3-venv \
+        cppcheck git ca-certificates
 
-RUN --mount=type=cache,target=/var/cache/apk \
-    apk add cppcheck
+ENV PIP_BREAK_SYSTEM_PACKAGES=1
 
 RUN --mount=type=cache,target=/root/.cache/pip \
     pip install ruff
@@ -30,20 +34,6 @@ RUN ESPHOME_INCLUDE=$(python3 -c "import esphome, os; print(os.path.dirname(os.p
         --suppress=useStlAlgorithm \
         --error-exitcode=1 \
         components/
-
-# Stage 2: Firmware compile (Debian for glibc compatibility with PlatformIO toolchains)
-FROM python:3.13-slim AS compile
-
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends git && \
-    rm -rf /var/lib/apt/lists/*
-
-WORKDIR /app
-COPY requirements.txt .
-RUN --mount=type=cache,target=/root/.cache/pip \
-    pip install -r requirements.txt
-
-COPY . .
 
 RUN --mount=type=cache,target=/root/.platformio \
     echo "=== ESPHome compile ===" && \
