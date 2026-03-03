@@ -1,7 +1,5 @@
 # Uplift Desk
 
-<img src="../../assets/uplift_desk/home-assistant.png?raw=true" width="50%">
-
 A configuration for [Uplift Desk](https://www.upliftdesk.com/) desks using the RJ12 port on the control box. This is the same port that the official [bluetooth adapter](https://www.upliftdesk.com/bluetooth-adapter-for-uplift-desk/) uses.
 
 ## Supported Features
@@ -23,8 +21,6 @@ Currently, this integration supports the following:
 
 ## RJ12 Pinout
 
-<img src="../../assets/uplift_desk/desk-pinout.jpg?raw=true" style="width: 25%">
-
 I found the Uplift Connect dongle pinout via the [FCC filing](https://fccid.io/2ANKDJCP35NBLT/Internal-Photos/Internal-Photos-3727739) (Thanks to [deadman96385](https://github.com/deadman96385) for sending that my way)
 
 There are 6 PINs on the desk's RJ12 port. The first and sixth PIN are not used. All communication occurs over UART and the ESP chip can be powered off of the 5v and GND PINs.
@@ -38,8 +34,6 @@ The port's pinout from left to right is as follows:
 1. ? (Not known but not necessary)
 
 ## Hardware Setup
-
-<img src="../../assets/uplift_desk/esp-wiring.jpg?raw=true" style="width: 25%">
 
 I use a NodeMCU spliced to a 4-inch RJ12. They can be powered off of 5v, so I directly power the ESP from the desk's 5v output.
 
