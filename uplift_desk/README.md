@@ -41,11 +41,20 @@ My current hardware could use a little polish, but I mounted it under my desk an
 
 ## Software Setup
 
-1. Copy the [common config](../common) into your local ESPHome configurations.
-1. Copy `uplift_desk.yaml` and `packages/uplift_desk.yaml` into your local ESPHome configurations.
-1. Copy the relevant lines from `secrets.yaml` and fill in random API and OTA passwords.
-1. Open `uplift_desk.yaml` and tweak the substitution values accordingly. The comments will explain each option.
-1. Device will show up in ESPHome and be ready to build!
+Add the external component to your ESPHome configuration:
+
+```yaml
+external_components:
+  - source: github://hjmcnew/esphome-configs@master
+    components: [uplift_desk]
+
+uart:
+  tx_pin: GPIOXX  # Your board's TX pin
+  rx_pin: GPIOXX  # Your board's RX pin
+  baud_rate: 9600
+```
+
+You can also use the ready-made [package](packages/uplift_desk.yaml) which includes the full sensor, switch, and button configuration. See the [test config](test_esp32c6.yaml) for a complete working example.
 
 ## Planned Features
 
