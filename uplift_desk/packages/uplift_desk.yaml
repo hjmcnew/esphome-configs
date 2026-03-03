@@ -1,5 +1,5 @@
 external_components:
-  - source: github://hjmcnew/esphome-configs@main
+  - source: github://hjmcnew/esphome-configs@master
     components: [uplift_desk]
 
 uart:

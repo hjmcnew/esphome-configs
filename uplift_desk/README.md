@@ -1,7 +1,5 @@
 # Uplift Desk
 
-<img src="../../assets/uplift_desk/home-assistant.png?raw=true" width="50%">
-
 A configuration for [Uplift Desk](https://www.upliftdesk.com/) desks using the RJ12 port on the control box. This is the same port that the official [bluetooth adapter](https://www.upliftdesk.com/bluetooth-adapter-for-uplift-desk/) uses.
 
 ## Supported Features
@@ -23,8 +21,6 @@ Currently, this integration supports the following:
 
 ## RJ12 Pinout
 
-<img src="../../assets/uplift_desk/desk-pinout.jpg?raw=true" style="width: 25%">
-
 I found the Uplift Connect dongle pinout via the [FCC filing](https://fccid.io/2ANKDJCP35NBLT/Internal-Photos/Internal-Photos-3727739) (Thanks to [deadman96385](https://github.com/deadman96385) for sending that my way)
 
 There are 6 PINs on the desk's RJ12 port. The first and sixth PIN are not used. All communication occurs over UART and the ESP chip can be powered off of the 5v and GND PINs.
@@ -39,19 +35,26 @@ The port's pinout from left to right is as follows:
 
 ## Hardware Setup
 
-<img src="../../assets/uplift_desk/esp-wiring.jpg?raw=true" style="width: 25%">
-
 I use a NodeMCU spliced to a 4-inch RJ12. They can be powered off of 5v, so I directly power the ESP from the desk's 5v output.
 
 My current hardware could use a little polish, but I mounted it under my desk and never have to see it so I don't mind for now.
 
 ## Software Setup
 
-1. Copy the [common config](../common) into your local ESPHome configurations.
-1. Copy `uplift_desk.yaml` and `packages/uplift_desk.yaml` into your local ESPHome configurations.
-1. Copy the relevant lines from `secrets.yaml` and fill in random API and OTA passwords.
-1. Open `uplift_desk.yaml` and tweak the substitution values accordingly. The comments will explain each option.
-1. Device will show up in ESPHome and be ready to build!
+Add the external component to your ESPHome configuration:
+
+```yaml
+external_components:
+  - source: github://hjmcnew/esphome-configs@master
+    components: [uplift_desk]
+
+uart:
+  tx_pin: GPIOXX  # Your board's TX pin
+  rx_pin: GPIOXX  # Your board's RX pin
+  baud_rate: 9600
+```
+
+You can also use the ready-made [package](packages/uplift_desk.yaml) which includes the full sensor, switch, and button configuration. See the [test config](test_esp32c6.yaml) for a complete working example.
 
 ## Planned Features
 
@@ -68,7 +71,7 @@ I am testing a "go to height" action, but it isn't perfect since the desk runs a
 
 ### Responses
 
-- Sending a sync command makes the desk send its current height along with the saved heights of all 4 presets. I have not been able to decipher the preset heights. The values seem to be more precise than inches, with the second value as a decimal, but so far I have been unable to correlate them to actual height values or find any helpful calibration output. See my observed values below. Feel free to post any thoughts in [#2](https://github.com/gabe565/esphome-configs/issues/2).
+- Sending a sync command makes the desk send its current height along with the saved heights of all 4 presets. I have not been able to decipher the preset heights. The values seem to be more precise than inches, with the second value as a decimal, but so far I have been unable to correlate them to actual height values or find any helpful calibration output. See my observed values below. Feel free to post any thoughts in [gabe565/esphome-configs#2](https://github.com/gabe565/esphome-configs/issues/2) or open a new issue on [this repo](https://github.com/hjmcnew/esphome-configs/issues).
 
 <details>
   <summary>Click to view observed prefix values</summary>

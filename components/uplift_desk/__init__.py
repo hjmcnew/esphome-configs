@@ -3,7 +3,7 @@ import esphome.config_validation as cv
 from esphome.components import uart
 from esphome.const import CONF_ID
 
-CODEOWNERS = ["@gabe565"]
+CODEOWNERS = ["@hjmcnew"]
 DEPENDENCIES = ["uart"]
 
 uplift_desk_ns = cg.esphome_ns.namespace("uplift_desk")
