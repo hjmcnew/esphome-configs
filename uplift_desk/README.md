@@ -62,7 +62,7 @@ I am testing a "go to height" action, but it isn't perfect since the desk runs a
 
 ### Responses
 
-- Sending a sync command makes the desk send its current height along with the saved heights of all 4 presets. I have not been able to decipher the preset heights. The values seem to be more precise than inches, with the second value as a decimal, but so far I have been unable to correlate them to actual height values or find any helpful calibration output. See my observed values below. Feel free to post any thoughts in [#2](https://github.com/gabe565/esphome-configs/issues/2).
+- Sending a sync command makes the desk send its current height along with the saved heights of all 4 presets. I have not been able to decipher the preset heights. The values seem to be more precise than inches, with the second value as a decimal, but so far I have been unable to correlate them to actual height values or find any helpful calibration output. See my observed values below. Feel free to post any thoughts in [gabe565/esphome-configs#2](https://github.com/gabe565/esphome-configs/issues/2) or open a new issue on [this repo](https://github.com/hjmcnew/esphome-configs/issues).
 
 <details>
   <summary>Click to view observed prefix values</summary>
