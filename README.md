@@ -13,3 +13,7 @@ external_components:
 ```
 
 See the [full documentation](uplift_desk) for hardware wiring, supported commands, and configuration details.
+
+## Credits
+
+This component was originally created by [gabe565](https://github.com/gabe565). The original work can be found at [gabe565/esphome-configs](https://github.com/gabe565/esphome-configs).
