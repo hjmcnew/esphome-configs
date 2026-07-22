@@ -2,9 +2,9 @@ name: Security Scan
 
 on:
   push:
-    branches: [main]
+    branches: [master]
   pull_request:
-    branches: [main]
+    branches: [master]
   schedule:
     - cron: "0 6 * * 1"
 
@@ -15,11 +15,12 @@ jobs:
   trivy:
     runs-on: ubuntu-latest
     steps:
-      - uses: https://code.forgejo.org/actions/checkout@v6
+      - uses: https://code.forgejo.org/actions/checkout@v7
       - name: Run Trivy vulnerability scanner
-        uses: aquasecurity/trivy-action@57a97c7e7821a5776cebc9bb87c984fa69cba8f1 # v0.35.0
+        # Run trivy directly as a container instead of aquasecurity/trivy-action:
+        # the action's setup-trivy chain checks out github.com repos and calls the
+        # GitHub REST API with the Forgejo token, which fails ("Bad credentials")
+        # on a self-hosted Forgejo runner.
+        uses: docker://aquasec/trivy:0.69.3@sha256:bcc376de8d77cfe086a917230e818dc9f8528e3c852f7b1aff648949b6258d1c
         with:
-          scan-type: fs
-          scan-ref: .
-          exit-code: 1
-          severity: CRITICAL,HIGH
+          args: fs --scanners vuln,secret --exit-code 1 --severity CRITICAL,HIGH --no-progress .

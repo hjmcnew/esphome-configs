@@ -10,7 +10,7 @@ jobs:
     name: Lint
     runs-on: ubuntu-latest
     steps:
-      - uses: https://code.forgejo.org/actions/checkout@v6
+      - uses: https://code.forgejo.org/actions/checkout@v7
       - uses: https://code.forgejo.org/actions/setup-python@v6
         with:
           python-version: "3.13"
@@ -25,7 +25,7 @@ jobs:
     name: C++ Static Analysis
     runs-on: ubuntu-latest
     steps:
-      - uses: https://code.forgejo.org/actions/checkout@v6
+      - uses: https://code.forgejo.org/actions/checkout@v7
       - uses: https://code.forgejo.org/actions/setup-python@v6
         with:
           python-version: "3.13"
@@ -51,7 +51,7 @@ jobs:
     name: Compile Firmware
     runs-on: ubuntu-latest
     steps:
-      - uses: https://code.forgejo.org/actions/checkout@v6
+      - uses: https://code.forgejo.org/actions/checkout@v7
       - uses: https://code.forgejo.org/actions/setup-python@v6
         with:
           python-version: "3.13"
