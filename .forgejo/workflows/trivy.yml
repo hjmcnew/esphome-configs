@@ -21,6 +21,6 @@ jobs:
         # the action's setup-trivy chain checks out github.com repos and calls the
         # GitHub REST API with the Forgejo token, which fails ("Bad credentials")
         # on a self-hosted Forgejo runner.
-        uses: docker://aquasec/trivy:0.69.3@sha256:bcc376de8d77cfe086a917230e818dc9f8528e3c852f7b1aff648949b6258d1c
+        uses: docker://aquasec/trivy:0.72.0@sha256:cffe3f5161a47a6823fbd23d985795b3ed72a4c806da4c4df16266c02accdd6f
         with:
           args: fs --scanners vuln,secret --exit-code 1 --severity CRITICAL,HIGH --no-progress .
