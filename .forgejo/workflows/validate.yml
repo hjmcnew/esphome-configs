@@ -56,7 +56,7 @@ jobs:
         with:
           python-version: "3.13"
           cache: pip
-      - uses: https://code.forgejo.org/actions/cache@v5
+      - uses: https://code.forgejo.org/actions/cache@v6
         with:
           path: ~/.platformio
           key: platformio-${{ hashFiles('requirements.txt') }}
